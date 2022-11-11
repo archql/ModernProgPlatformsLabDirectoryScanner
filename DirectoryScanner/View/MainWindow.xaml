@@ -22,7 +22,6 @@
                             <TextBlock Text=" bytes, "/>
                             <TextBlock Text="{Binding PercentSize, StringFormat=N2}"/>
                             <TextBlock Text="%)"/>
-                            <TextBlock Text="{Binding Image}" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>

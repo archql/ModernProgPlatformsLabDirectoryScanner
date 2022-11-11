@@ -14,12 +14,12 @@ namespace lab3DirectoryScanner.DirectoryScanner
         private readonly ConcurrentQueue<DirScannerTask> _taskQueue;
         private readonly CancellationTokenSource _cancellationTokenSrc;
 
-        private bool _isScanning;
+        private bool _scannerIsPreparing = false; // protect from early exit
         private int _maxThreadCount, _threadCount;
 
         Thread _scannerThread;
 
-        public bool Finished => (_taskQueue.IsEmpty && _threadCount == _maxThreadCount) || _cancellationTokenSrc.IsCancellationRequested;
+        public bool Finished => (_taskQueue.IsEmpty && _threadCount == _maxThreadCount && !_scannerIsPreparing) || _cancellationTokenSrc.IsCancellationRequested;
 
         public DirScannerThPool()
         {
@@ -30,7 +30,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
         {
             _threadCount = _maxThreadCount = maxThreadCount;
             _semaphore = new Semaphore(maxThreadCount, maxThreadCount);
-            _isScanning = true;
+            _scannerIsPreparing = true;
 
             _scannerThread = new Thread(ScannerWorkout);
             _scannerThread.Start(_cancellationTokenSrc.Token);
@@ -44,6 +44,8 @@ namespace lab3DirectoryScanner.DirectoryScanner
         public void Shedule(DirScannerTask task)
         {
             _taskQueue.Enqueue(task);
+
+            _scannerIsPreparing = false;
         }
 
         private void ScannerWorkout(object ?param)

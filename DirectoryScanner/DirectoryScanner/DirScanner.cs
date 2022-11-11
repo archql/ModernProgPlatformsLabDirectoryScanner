@@ -14,6 +14,8 @@ namespace lab3DirectoryScanner.DirectoryScanner
 
         public DirScanner(string dir)
         {
+            dir = Path.GetFullPath(dir);
+
             _directoryPath = dir;
             _dirScannerThPool = new DirScannerThPool();
             _treeManager = new TreeManager(new TreeNode(dir));
@@ -25,11 +27,6 @@ namespace lab3DirectoryScanner.DirectoryScanner
             if (!Directory.Exists(_directoryPath))
             {
                 throw new DirectoryNotFoundException("Not found: " + _directoryPath);
-            }
-            FileAttributes attr = File.GetAttributes(_directoryPath);
-            if (!attr.HasFlag(FileAttributes.Directory))
-            {
-                throw new ArgumentException("Supposed to be a directory path: " + _directoryPath);
             }
             _dirScannerThPool.Start(threadCount);
             _dirScannerThPool.Shedule(new DirScannerTask(_treeManager, _treeManager.Head()));
