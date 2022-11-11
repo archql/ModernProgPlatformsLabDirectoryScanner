@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DirectoryScanner
+namespace lab3DirectoryScanner.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

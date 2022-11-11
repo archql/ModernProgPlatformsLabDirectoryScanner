@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DirectoryScanner
+namespace lab3DirectoryScanner.View
 {
     /// <summary>
     /// Interaction logic for App.xaml

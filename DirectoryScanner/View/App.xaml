@@ -1,7 +1,7 @@
-﻿<Application x:Class="DirectoryScanner.App"
+﻿<Application x:Class="lab3DirectoryScanner.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DirectoryScanner"
+             xmlns:local="clr-namespace:lab3DirectoryScanner.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
