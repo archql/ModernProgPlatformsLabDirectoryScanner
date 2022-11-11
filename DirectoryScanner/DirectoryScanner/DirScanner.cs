@@ -10,6 +10,8 @@ namespace lab3DirectoryScanner.DirectoryScanner
         private IDirScannerThPool _dirScannerThPool;
         private ITreeManager _treeManager;
 
+        public bool Finished => _dirScannerThPool.Finished;
+
         public DirScanner(string dir)
         {
             _directoryPath = dir;
@@ -20,9 +22,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
         public void Start(int threadCount)
         {
             _threadCount = threadCount;
-            var fileInfo = new FileInfo(_directoryPath);
-
-            if (!fileInfo.Exists)
+            if (!Directory.Exists(_directoryPath))
             {
                 throw new DirectoryNotFoundException("Not found: " + _directoryPath);
             }
@@ -40,9 +40,14 @@ namespace lab3DirectoryScanner.DirectoryScanner
             _dirScannerThPool.Stop();
         }
 
-        public bool result()
+        public void WaitForCompletion()
         {
-            return false;
+            _dirScannerThPool.WaitForCompletion();
+        }
+
+        public ITreeManager Result()
+        {
+            return _treeManager;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
 
         Thread _scannerThread;
 
-        public bool Finished => throw new NotImplementedException();
+        public bool Finished => (_taskQueue.IsEmpty && _threadCount == _maxThreadCount) || _cancellationTokenSrc.IsCancellationRequested;
 
         public DirScannerThPool()
         {
@@ -52,7 +52,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
                 return;
             CancellationToken token = (CancellationToken)param;
 
-            while (!token.IsCancellationRequested)
+            while (!Finished)
             {
                 if (_taskQueue.IsEmpty)
                     continue;
@@ -82,6 +82,11 @@ namespace lab3DirectoryScanner.DirectoryScanner
                 Interlocked.Increment(ref _threadCount);
                 _semaphore.Release();
             }
+        }
+
+        public void WaitForCompletion()
+        {
+            _scannerThread.Join();
         }
     }
 }

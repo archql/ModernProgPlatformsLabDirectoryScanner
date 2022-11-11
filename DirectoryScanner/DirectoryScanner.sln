@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{851235A8-D2F5-4C67-92F5-DCAEB5A4E837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "View\View.csproj", "{851235A8-D2F5-4C67-92F5-DCAEB5A4E837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryScanner", "DirectoryScanner\DirectoryScanner.csproj", "{9C381EFE-581D-46F5-B3F3-61D2028FEB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectoryScanner", "DirectoryScanner\DirectoryScanner.csproj", "{9C381EFE-581D-46F5-B3F3-61D2028FEB3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExample", "ConsoleExample\ConsoleExample.csproj", "{682591F0-9911-4978-990B-11679501A779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9C381EFE-581D-46F5-B3F3-61D2028FEB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C381EFE-581D-46F5-B3F3-61D2028FEB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C381EFE-581D-46F5-B3F3-61D2028FEB3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{682591F0-9911-4978-990B-11679501A779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682591F0-9911-4978-990B-11679501A779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682591F0-9911-4978-990B-11679501A779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682591F0-9911-4978-990B-11679501A779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

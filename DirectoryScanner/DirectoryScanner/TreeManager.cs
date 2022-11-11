@@ -29,6 +29,14 @@ namespace lab3DirectoryScanner.DirTreeManager
             return _treeHead;
         }
 
+        public void CalcSize()
+        {
+            _treeHead.CalcSize();
+        }
 
+        public void PrintToConsole()
+        {
+            _treeHead.PrintToConsole();
+        }
     }
 }

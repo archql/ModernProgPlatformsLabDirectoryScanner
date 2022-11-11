@@ -29,7 +29,7 @@ namespace lab3DirectoryScanner.DirTreeManager
             _childs.Add(child);
         }
 
-        internal long GetSize()
+        internal long CalcSize()
         {
             long totalSize = 0;
             if (Type != TreeNodeType.Directory)
@@ -37,16 +37,31 @@ namespace lab3DirectoryScanner.DirTreeManager
             // calc total size
             foreach (TreeNode child in _childs)
             {
-                totalSize += child.GetSize();
+                totalSize += child.CalcSize();
             }
+            TotalSize = totalSize;
+
             // set percentages
             foreach (TreeNode child in _childs)
             {
-                Percent = child.TotalSize / totalSize * 100;
+                child.Percent = (double)child.TotalSize / totalSize * 100.0;
             }
 
-            TotalSize = totalSize;
             return totalSize;
+        }
+
+        public void PrintToConsole(int level = 0)
+        {
+            string name = Type == TreeNodeType.Directory ? "dir" : "file";
+
+            for (int i = 0; i < level; i++)
+                Console.Out.Write('\t');
+            Console.Out.WriteLine(name + " " + Path + " " + TotalSize + " (" + string.Format("{0:0.##}", Percent) + "%)");
+
+            foreach (TreeNode child in _childs)
+            {
+                child.PrintToConsole(level + 1);
+            }
         }
     }
 

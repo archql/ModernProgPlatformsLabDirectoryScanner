@@ -35,8 +35,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
             foreach (var subDir in entries)
             {
                 FileAttributes subAttr = File.GetAttributes(subDir);
-                FileInfo subInfo = new FileInfo(subDir);
-                if (!subInfo.Exists)
+                if (!Directory.Exists(subDir) && !File.Exists(subDir))
                 {
                     continue;
                 }
@@ -55,6 +54,8 @@ namespace lab3DirectoryScanner.DirectoryScanner
                 else
                 {
                     // get file size
+                    FileInfo subInfo = new FileInfo(subDir);
+
                     node.Size = subInfo.Length;
                     node.Type = TreeNodeType.File;
                 }

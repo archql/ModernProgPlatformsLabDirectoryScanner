@@ -6,5 +6,6 @@
         void Start(int maxThreadCount);
         void Shedule(DirScannerTask task);
         void Stop();
+        void WaitForCompletion();
     }
 }
