@@ -5,30 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab3DirectoryScanner.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="640" Width="1280">
+    <Window.DataContext>
+        <local:DirScannerViewModel/>
+    </Window.DataContext>
     <Grid>
-        <ScrollViewer x:Name="scTreeView" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="800" Height="340" VerticalAlignment="Top" Margin="0,96,0,0">
-            <TreeView ItemsSource="{Binding Tree.InnerNodes}" Background="#FFFEFEFE" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <ScrollViewer x:Name="scTreeView" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="528" VerticalAlignment="Top" Margin="0,96,0,0" HorizontalAlignment="Center" Width="1280">
+            <TreeView ItemsSource="{Binding TreeViewList}" Background="#FFFEFEFE" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=InnerNodes}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=TreeViewNodes}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20" Height="15" Source="{Binding Path=ImagePath}"/>
+                            <Image Width="20" Height="20" Source="{Binding Image}"/>
                             <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Text=" ( "/>
-                            <TextBlock Text="{Binding AbsoluteSize}"/>
-                            <TextBlock Text=" b, "/>
-                            <TextBlock Text="{Binding RelativeSize, StringFormat=N2}"/>
-                            <TextBlock Text="% )"/>
+                            <TextBlock Text=" ("/>
+                            <TextBlock Text="{Binding TotalSize}"/>
+                            <TextBlock Text=" bytes, "/>
+                            <TextBlock Text="{Binding PercentSize, StringFormat=N2}"/>
+                            <TextBlock Text="%)"/>
+                            <TextBlock Text="{Binding Image}" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
         </ScrollViewer>
         <TextBlock x:Name="txtState" HorizontalAlignment="Left" Margin="37,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="110" Height="36" FontSize="16" TextAlignment="Center" Background="#FFEFEFEF" Padding="5,5,5,5"/>
-        <TextBlock x:Name="txtPath" Margin="152,10,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="36" FontSize="16" TextAlignment="Left" Background="#FFEFEFEF" Padding="5,5,5,5"/>
-        <Button x:Name="btOpen" Content="Open new dir" HorizontalAlignment="Left" Margin="37,51,0,0" VerticalAlignment="Top" Height="40" Width="110" UseLayoutRounding="False"/>
-        <Button x:Name="btToggle" Content="Button" HorizontalAlignment="Left" Margin="152,51,0,0" VerticalAlignment="Top" Height="40" Width="110" UseLayoutRounding="False"/>
-	
+        <TextBlock x:Name="txtPath" Margin="152,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" FontSize="16" TextAlignment="Left" Background="#FFEFEFEF" Padding="5,5,5,5" Text="{Binding FilePath}"/>
+        <Button x:Name="btOpen" Content="Open new dir" HorizontalAlignment="Left" Margin="37,51,0,0" VerticalAlignment="Top" Height="40" Width="110" UseLayoutRounding="False" Command="{Binding ChooseFile, Mode=OneWay}"/>
+        <Button x:Name="btToggle" Content="Run Search" HorizontalAlignment="Left" Margin="152,51,0,0" VerticalAlignment="Top" Height="40" Width="110" UseLayoutRounding="False" Cursor="{Binding IsFileChosen}" Command="{Binding RunSearch, Mode=OneWay}" IsEnabled="{Binding IsReady, Mode=OneWay}"/>
+        <Button x:Name="btStop" Content="Stop Search" HorizontalAlignment="Left" Margin="267,51,0,0" VerticalAlignment="Top" Height="40" Width="110" UseLayoutRounding="False" Cursor="{Binding IsSearching}" Command="{Binding StopSearch, Mode=OneWay}" IsEnabled="{Binding IsSearching}"/>
+
 
     </Grid>
 </Window>

@@ -8,7 +8,7 @@ namespace lab3DirectoryScanner.DirTreeManager
 {
     public class TreeNode
     {
-        List<TreeNode> _childs;
+        public readonly List<TreeNode>Childs;
 
         public string Path { get; private set; }
         public TreeNodeType Type { get; set; } = TreeNodeType.Directory;
@@ -20,13 +20,13 @@ namespace lab3DirectoryScanner.DirTreeManager
 
         public TreeNode (string path)
         {
-            _childs = new List<TreeNode>();
+            Childs = new List<TreeNode>();
             Path = path;
         }
 
         internal void AddChild(TreeNode child)
         {
-            _childs.Add(child);
+            Childs.Add(child);
         }
 
         internal long CalcSize()
@@ -35,14 +35,14 @@ namespace lab3DirectoryScanner.DirTreeManager
             if (Type != TreeNodeType.Directory)
                 totalSize = Size;
             // calc total size
-            foreach (TreeNode child in _childs)
+            foreach (TreeNode child in Childs)
             {
                 totalSize += child.CalcSize();
             }
             TotalSize = totalSize;
 
             // set percentages
-            foreach (TreeNode child in _childs)
+            foreach (TreeNode child in Childs)
             {
                 child.Percent = (double)child.TotalSize / totalSize * 100.0;
             }
@@ -58,7 +58,7 @@ namespace lab3DirectoryScanner.DirTreeManager
                 Console.Out.Write('\t');
             Console.Out.WriteLine(name + " " + Path + " " + TotalSize + " (" + string.Format("{0:0.##}", Percent) + "%)");
 
-            foreach (TreeNode child in _childs)
+            foreach (TreeNode child in Childs)
             {
                 child.PrintToConsole(level + 1);
             }
