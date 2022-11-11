@@ -41,7 +41,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
             _cancellationTokenSrc.Cancel();
         }
 
-        public void Sheudule(DirScannerTask task)
+        public void Shedule(DirScannerTask task)
         {
             _taskQueue.Enqueue(task);
         }
@@ -73,7 +73,7 @@ namespace lab3DirectoryScanner.DirectoryScanner
                 if (param != null)
                 {
                     var task = (DirScannerTask)param;
-                    task.run();
+                    task.run(_taskQueue);
                 }
             }
             catch { }

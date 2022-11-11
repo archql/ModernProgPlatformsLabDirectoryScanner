@@ -4,7 +4,7 @@
     {
         bool Finished { get; }
         void Start(int maxThreadCount);
-        void Sheudule(DirScannerTask task);
+        void Shedule(DirScannerTask task);
         void Stop();
     }
 }
